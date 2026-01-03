@@ -1,0 +1,325 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dharma Academy • YouTube Titel Generator</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      color-scheme: light;
+      --background: #f5f5f7;
+      --surface: #ffffff;
+      --surface-strong: #f0f0f3;
+      --text: #1d1d1f;
+      --muted: #6e6e73;
+      --accent: #0a84ff;
+      --accent-strong: #0860c7;
+      --shadow: 0 24px 80px rgba(0, 0, 0, 0.12);
+      --radius-lg: 28px;
+      --radius-md: 18px;
+      --radius-sm: 12px;
+      --glow: radial-gradient(circle at top, rgba(10, 132, 255, 0.16), transparent 60%);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--background);
+      color: var(--text);
+    }
+
+    .page {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 56px 20px 80px;
+      background: var(--glow), var(--background);
+    }
+
+    .app {
+      width: min(1100px, 100%);
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 28px;
+    }
+
+    .panel {
+      background: var(--surface);
+      border-radius: var(--radius-lg);
+      padding: 32px;
+      box-shadow: var(--shadow);
+    }
+
+    .hero {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .badge {
+      align-self: flex-start;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: rgba(10, 132, 255, 0.12);
+      color: var(--accent-strong);
+      font-weight: 600;
+      font-size: 0.85rem;
+      letter-spacing: 0.02em;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(2rem, 3vw, 2.6rem);
+      letter-spacing: -0.02em;
+    }
+
+    .subtitle {
+      color: var(--muted);
+      font-size: 1.05rem;
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    .form {
+      display: grid;
+      gap: 16px;
+    }
+
+    label {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--muted);
+    }
+
+    input, select {
+      width: 100%;
+      padding: 14px 16px;
+      border-radius: var(--radius-sm);
+      border: 1px solid transparent;
+      background: var(--surface-strong);
+      font-size: 1rem;
+      color: var(--text);
+      transition: border 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    input:focus, select:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 4px rgba(10, 132, 255, 0.18);
+    }
+
+    .button-row {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    button {
+      border: none;
+      padding: 14px 20px;
+      border-radius: 999px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    }
+
+    .primary {
+      background: var(--accent);
+      color: white;
+      box-shadow: 0 12px 24px rgba(10, 132, 255, 0.3);
+    }
+
+    .primary:hover {
+      background: var(--accent-strong);
+      transform: translateY(-1px);
+    }
+
+    .ghost {
+      background: white;
+      color: var(--text);
+      box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.08);
+    }
+
+    .ghost:hover {
+      transform: translateY(-1px);
+    }
+
+    .output {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .title-card {
+      background: linear-gradient(135deg, rgba(10, 132, 255, 0.12), rgba(10, 132, 255, 0.02));
+      padding: 18px 20px;
+      border-radius: var(--radius-md);
+      font-weight: 600;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .title-text {
+      font-size: 1rem;
+      line-height: 1.4;
+    }
+
+    .pill {
+      background: rgba(10, 132, 255, 0.18);
+      color: var(--accent-strong);
+      border-radius: 999px;
+      padding: 6px 10px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .meta {
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    footer {
+      margin-top: 18px;
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    @media (max-width: 720px) {
+      .panel {
+        padding: 24px;
+      }
+
+      .button-row {
+        flex-direction: column;
+      }
+
+      button {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <div class="app">
+      <section class="panel hero">
+        <span class="badge">Dharma Academy • Tatsudo Nicole Baden</span>
+        <h1>Großartige YouTube-Titel mit Apple-Style Flair.</h1>
+        <p class="subtitle">
+          Generiere klickstarke Titel, die deine Zielgruppe sofort neugierig machen. Nutze Fokus, Spannung
+          und klare Versprechen, abgestimmt auf den modernen Dharma Academy Look.
+        </p>
+        <form class="form" id="generator-form">
+          <div>
+            <label for="topic">Video-Thema</label>
+            <input id="topic" name="topic" placeholder="z. B. Morgenroutine für innere Ruhe" required />
+          </div>
+          <div>
+            <label for="audience">Zielgruppe</label>
+            <input id="audience" name="audience" placeholder="z. B. gestresste Führungskräfte" required />
+          </div>
+          <div>
+            <label for="benefit">Zentrales Ergebnis</label>
+            <input id="benefit" name="benefit" placeholder="z. B. mehr Fokus in 10 Minuten" required />
+          </div>
+          <div>
+            <label for="tone">Ton & Stil</label>
+            <select id="tone" name="tone">
+              <option value="inspirierend">Inspirierend</option>
+              <option value="klar">Klar & Direkt</option>
+              <option value="spirituell">Spirituell & Ruhig</option>
+              <option value="mutig">Mutig & Provokant</option>
+            </select>
+          </div>
+          <div class="button-row">
+            <button type="submit" class="primary">Titel generieren</button>
+            <button type="button" class="ghost" id="shuffle">Neu mixen</button>
+          </div>
+        </form>
+        <footer>Erstellt für Dharma Academy, damit jedes Video wie ein Premium-Release wirkt.</footer>
+      </section>
+
+      <section class="panel output">
+        <h2>Deine empfohlenen Titel</h2>
+        <p class="meta">Passe die Vorschläge an, bis sie perfekt zum Video passen.</p>
+        <div id="results"></div>
+      </section>
+    </div>
+  </main>
+
+  <script>
+    const templates = [
+      ({ topic, benefit }) => `${topic}: So erreichst du ${benefit} (ohne Druck)`,
+      ({ topic, audience }) => `Warum ${audience} jetzt ${topic} brauchen`,
+      ({ benefit }) => `Die 3 Schritte zu ${benefit} – sofort umsetzbar`,
+      ({ topic }) => `${topic}: Der wichtigste Perspektivwechsel`,
+      ({ audience, benefit }) => `Für ${audience}: ${benefit} in nur 10 Minuten`,
+      ({ topic, benefit }) => `Endlich ${benefit}: Mein neuer Ansatz für ${topic}`,
+      ({ topic, audience }) => `${topic} neu gedacht – speziell für ${audience}`,
+      ({ benefit }) => `So fühlt sich ${benefit} wirklich an (und wie du es schaffst)`,
+    ];
+
+    const toneTags = {
+      inspirierend: "Glow",
+      klar: "Focus",
+      spirituell: "Calm",
+      mutig: "Bold",
+    };
+
+    const form = document.getElementById("generator-form");
+    const results = document.getElementById("results");
+    const shuffle = document.getElementById("shuffle");
+
+    function createTitleCard(text, tone) {
+      const card = document.createElement("div");
+      card.className = "title-card";
+      const span = document.createElement("span");
+      span.className = "title-text";
+      span.textContent = text;
+      const pill = document.createElement("span");
+      pill.className = "pill";
+      pill.textContent = toneTags[tone];
+      card.append(span, pill);
+      return card;
+    }
+
+    function generateTitles(values) {
+      const shuffled = [...templates].sort(() => Math.random() - 0.5).slice(0, 5);
+      results.innerHTML = "";
+      shuffled.forEach((template) => {
+        const text = template(values);
+        results.appendChild(createTitleCard(text, values.tone));
+      });
+    }
+
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+      const data = new FormData(form);
+      const values = Object.fromEntries(data.entries());
+      generateTitles(values);
+    });
+
+    shuffle.addEventListener("click", () => {
+      const data = new FormData(form);
+      const values = Object.fromEntries(data.entries());
+      if (!values.topic || !values.audience || !values.benefit) {
+        form.requestSubmit();
+        return;
+      }
+      generateTitles(values);
+    });
+  </script>
+</body>
+</html>
